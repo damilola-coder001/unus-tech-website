@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Workflow automation, custom business applications, system integration, and AI-powered solutions: what each service solves, and when each may not be for you.",
+  alternates: { canonical: "/services" },
 };
 
 const industries = [

@@ -6,7 +6,8 @@ import { MeetingCTA } from "@/components/MeetingCTA";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Tell us about the process you'd like to improve. Send a project inquiry or book a free 20-minute meeting to discuss your operations.",
+    "Tell us about the process you'd like to improve. Send a project inquiry or book a free 30-minute meeting to discuss your operations.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

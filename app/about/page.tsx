@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Our philosophy: understand the process before automating it, choose appropriate technology, and build for maintainability and reliability.",
+  alternates: { canonical: "/about" },
 };
 
 const principles = [

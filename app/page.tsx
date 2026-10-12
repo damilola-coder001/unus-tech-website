@@ -8,6 +8,7 @@ import { ProjectCard } from "@/components/ProjectEmbed";
 export const metadata: Metadata = {
   title: `${brand.name} — ${brand.tagline}`,
   description: brand.description,
+  alternates: { canonical: "/" },
 };
 
 export default function HomePage() {

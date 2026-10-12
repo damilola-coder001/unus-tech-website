@@ -4,6 +4,7 @@ import { brand, contact } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: `How ${brand.name} handles information shared through this website.`,
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

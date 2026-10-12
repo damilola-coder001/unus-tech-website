@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Our Work",
   description:
     "Selected projects from Unus Technologies. Each project shows the problem, the solution, and a live interactive preview where available.",
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {
