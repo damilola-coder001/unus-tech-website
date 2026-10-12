@@ -552,6 +552,13 @@ a:hover {
   color: var(--color-ink);
 }
 
+.follow-heading {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-top: var(--space-sm);
+}
+
 .footer-bottom {
   margin-top: var(--space-md);
   padding-top: var(--space-sm);

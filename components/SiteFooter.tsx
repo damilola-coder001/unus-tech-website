@@ -44,20 +44,31 @@ export function SiteFooter() {
           {contact.email || socials.length > 0 ? (
             <div>
               <strong>Contact</strong>
-              <ul>
-                {contact.email ? (
+              {contact.email ? (
+                <ul>
                   <li>
                     <a href={`mailto:${contact.email}`}>{contact.email}</a>
                   </li>
-                ) : null}
-                {socials.map((s) => (
-                  <li key={s.href}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer">
-                      {s.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+                </ul>
+              ) : null}
+              {socials.length > 0 ? (
+                <>
+                  <strong className="follow-heading">Follow us</strong>
+                  <ul>
+                    {socials.map((s) => (
+                      <li key={s.href}>
+                        <a
+                          href={s.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {s.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
             </div>
           ) : null}
         </div>
