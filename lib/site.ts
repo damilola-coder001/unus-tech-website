@@ -305,8 +305,21 @@ export interface SocialLink {
   href: string;
 }
 
-/** Add social links here once accounts exist. Empty = footer omits the section. */
-export const socials: SocialLink[] = [];
+/** Social profiles shown under "Contact" in the footer. Empty = only email shows. */
+export const socials: SocialLink[] = [
+  {
+    label: "UnusTechnologies",
+    href: "https://www.facebook.com/share/1ExPGyMNmx/",
+  },
+];
 
+/**
+ * Canonical site URL for metadata, sitemap, and Open Graph tags.
+ * Set NEXT_PUBLIC_SITE_URL once a custom domain exists. Until then,
+ * production on Vercel resolves automatically and local dev uses localhost.
+ */
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://unustechnologies.com";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");

@@ -40,32 +40,23 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
-            {socials.length > 0 && (
-              <>
-                <strong>Elsewhere</strong>
-                <ul>
-                  {socials.map((s) => (
-                    <li key={s.href}>
-                      <a
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {s.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
           </div>
-          {contact.email ? (
+          {contact.email || socials.length > 0 ? (
             <div>
               <strong>Contact</strong>
               <ul>
-                <li>
-                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
-                </li>
+                {contact.email ? (
+                  <li>
+                    <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                  </li>
+                ) : null}
+                {socials.map((s) => (
+                  <li key={s.href}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer">
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           ) : null}
