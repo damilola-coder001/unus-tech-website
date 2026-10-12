@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Environment variables (never commit real secrets)
+.env
+.env*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db

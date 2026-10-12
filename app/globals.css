@@ -1,0 +1,719 @@
+/* Design tokens — EDIT HERE to change the site's palette, type, or spacing.
+   Default theme is the dark premium look drawn from the Unus logo:
+   near-black surfaces, warm-white type, champagne-gold accents.
+   `[data-theme="light"]` (set on <html> by ThemeToggle) switches to the
+   warm-paper light theme. Components must use these tokens — never
+   hard-code a surface or type color — so both themes stay consistent. */
+
+:root {
+  color-scheme: dark;
+
+  --color-bg: #070708;
+  --color-bg-soft: #101013;
+  --color-bg-raised: #17171b;
+  --color-ink: #f4f2ec;
+  --color-ink-soft: #cfcdc5;
+  --color-muted: #9d9a91;
+  --color-line: #26262b;
+  --color-gold: #d8b98a;
+  --color-gold-hover: #e7c795;
+  --color-on-gold: #0b0b0c;
+  --color-accent: var(--color-gold);
+  --color-accent-ink: var(--color-on-gold);
+  --color-accent-hover: var(--color-gold-hover);
+  --color-focus: var(--color-gold);
+  --color-error: #eda3a3;
+  --color-header-bg: rgba(7, 7, 8, 0.92);
+  --color-footer-bg: #0a0a0c;
+  --color-shimmer: #232329;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  --measure: 62ch;
+  --content-width: 72rem;
+  --radius: 8px;
+}
+
+/* Light theme. --color-gold darkens for readable text/links on paper,
+   while --color-accent keeps the brighter champagne so gold buttons
+   retain dark text in both themes. */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #faf7f0;
+  --color-bg-soft: #f1ede1;
+  --color-bg-raised: #fffdf8;
+  --color-ink: #211d15;
+  --color-ink-soft: #4e4a3f;
+  --color-muted: #787263;
+  --color-line: #e0d9c4;
+  --color-gold: #86620f;
+  --color-gold-hover: #6e4f0a;
+  --color-on-gold: #0b0b0c;
+  --color-accent: #d8b98a;
+  --color-accent-ink: #0b0b0c;
+  --color-accent-hover: #e7c795;
+  --color-focus: #86620f;
+  --color-error: #a83232;
+  --color-header-bg: rgba(250, 247, 240, 0.92);
+  --color-footer-bg: #f1ede1;
+  --color-shimmer: #e4ddc9;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-bg);
+  line-height: 1.65;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-sm);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p {
+  margin: 0 0 var(--space-sm);
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--color-gold);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--color-gold-hover);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  background: var(--color-gold);
+  color: var(--color-bg);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  z-index: 100;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  color: var(--color-bg);
+}
+
+.container {
+  width: min(100% - 2.5rem, var(--content-width));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--space-xl);
+}
+
+.section + .section {
+  border-top: 1px solid var(--color-line);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  margin-bottom: var(--space-sm);
+}
+
+.lead {
+  font-size: 1.15rem;
+  color: var(--color-ink-soft);
+}
+
+/* Centered headings and intros. Page and section titles plus their lead
+   paragraphs center; body copy, cards, and lists stay left-aligned for
+   readability. Only direct children are targeted so nested content
+   (project cards, form columns, footer) is unaffected. */
+.container > h1,
+.container > h2,
+.container > .eyebrow,
+.container > p.lead,
+.meeting-band,
+.hero-grid > div:first-child {
+  text-align: center;
+}
+
+.container > p.lead,
+.meeting-band .lead,
+.hero-grid .lead {
+  margin-inline: auto;
+}
+
+.button {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-weight: 700;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 1px solid transparent;
+  line-height: 1.4;
+}
+
+.button:hover {
+  background: var(--color-accent-hover);
+  color: var(--color-accent-ink);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-line);
+}
+
+.button-secondary:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: transparent;
+}
+
+.cta-eyebrow {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.35rem;
+}
+
+/* Content card: subtle warm tint fading into the raised surface,
+   gold title. Used for the problems/services/principles/industries
+   grids. The tint is translucent so it suits both themes. */
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(216, 185, 138, 0.12),
+    var(--color-bg-soft) 55%
+  );
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+}
+
+.card h3 {
+  color: var(--color-gold);
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.grid-2 {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+
+.grid-3 {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 48rem) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Header */
+.site-header {
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-header-bg);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-block: 0.7rem;
+}
+
+/* Text wordmark echoing the logo lockup (the artwork itself lives in hero/footer). */
+.brand-link {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  text-decoration: none;
+}
+
+.brand-mark {
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.brand-sub {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  color: var(--color-muted);
+}
+
+.brand-link:hover .brand-mark {
+  color: var(--color-gold);
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  font: inherit;
+  font-weight: 650;
+  background: none;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  color: var(--color-ink);
+}
+
+/* Theme toggle — same chrome as the mobile nav button. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font: inherit;
+  font-weight: 650;
+  font-size: 0.9rem;
+  background: none;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.theme-toggle svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.site-nav {
+  display: none;
+}
+
+.site-nav[data-open="true"] {
+  display: block;
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+  padding: var(--space-sm) 1.25rem var(--space-md);
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.site-nav a {
+  display: block;
+  color: var(--color-ink-soft);
+  text-decoration: none;
+  padding: 0.6rem 0.25rem;
+  font-weight: 600;
+}
+
+.site-nav a:hover {
+  color: var(--color-gold);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--color-gold);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (min-width: 48rem) {
+  .nav-toggle {
+    display: none;
+  }
+  .site-nav {
+    display: block;
+  }
+  .site-nav[data-open="true"] {
+    position: static;
+    border: 0;
+    padding: 0;
+  }
+  .site-nav ul {
+    flex-direction: row;
+    gap: var(--space-md);
+  }
+  .site-nav a {
+    padding: 0.25rem 0;
+  }
+}
+
+/* Hero */
+.hero {
+  padding-block: var(--space-2xl) var(--space-xl);
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+@media (min-width: 56rem) {
+  .hero-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+/* Logo artwork sits on the same near-black as the page, with a faint
+   champagne glow so it feels lit rather than pasted. */
+.hero-art {
+  position: relative;
+  max-width: 30rem;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.hero-art::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(
+    closest-side,
+    rgba(216, 185, 138, 0.16),
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+.hero-art img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--color-line);
+  background: var(--color-footer-bg);
+  padding-block: var(--space-lg);
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+}
+
+.footer-logo {
+  width: 11rem;
+  max-width: 60%;
+  height: auto;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.footer-motto {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.footer-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 48rem) {
+  .footer-grid {
+    grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+  }
+}
+
+.footer-grid ul {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.footer-grid li {
+  margin-bottom: 0.35rem;
+}
+
+.footer-grid a {
+  color: var(--color-ink-soft);
+}
+
+.footer-grid a:hover {
+  color: var(--color-gold);
+}
+
+.footer-grid strong {
+  color: var(--color-ink);
+}
+
+.footer-bottom {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-line);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* Project preview */
+.project {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  background: var(--color-bg-soft);
+}
+
+.project + .project {
+  margin-top: var(--space-md);
+}
+
+.project-meta {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  text-transform: capitalize;
+}
+
+.embed-frame {
+  position: relative;
+  margin-top: var(--space-sm);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-bg-raised);
+  aspect-ratio: 16 / 10;
+}
+
+.embed-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  color-scheme: light;
+}
+
+.embed-placeholder,
+.embed-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  text-align: center;
+  padding: var(--space-md);
+  color: var(--color-ink-soft);
+}
+
+.embed-skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    var(--color-bg-raised) 40%,
+    var(--color-shimmer) 50%,
+    var(--color-bg-raised) 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Forms */
+.form-field {
+  margin-bottom: var(--space-sm);
+}
+
+.form-field label {
+  display: block;
+  font-weight: 650;
+  margin-bottom: 0.3rem;
+  color: var(--color-ink);
+}
+
+.form-field .optional {
+  font-weight: 400;
+  color: var(--color-muted);
+  font-size: 0.9em;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  font: inherit;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-bg-raised);
+  color: var(--color-ink);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--color-muted);
+}
+
+.field-error {
+  color: var(--color-error);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.form-status {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.form-status[data-tone="success"] {
+  border-color: var(--color-gold);
+}
+
+.form-status[data-tone="error"] {
+  border-color: var(--color-error);
+}
+
+/* Meeting CTA band */
+.meeting-band {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+}
+
+.meeting-band h2 {
+  color: var(--color-gold);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  .site-header,
+  .site-footer {
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .embed-skeleton {
+    animation: none;
+  }
+}
