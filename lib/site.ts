@@ -315,11 +315,16 @@ export const socials: SocialLink[] = [
 
 /**
  * Canonical site URL for metadata, sitemap, and Open Graph tags.
- * Set NEXT_PUBLIC_SITE_URL once a custom domain exists. Until then,
+ *
+ * Set NEXT_PUBLIC_SITE_URL to the production URL (e.g. your vercel.app
+ * URL) — it is baked in at build time, so the deployed sitemap and
+ * robots.txt list the live host instead of localhost. Until it is set,
  * production on Vercel resolves automatically and local dev uses localhost.
  */
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
