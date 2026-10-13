@@ -37,6 +37,7 @@ export const navigation: NavItem[] = [
   { label: "Services", href: "/services" },
   { label: "Our Work", href: "/work" },
   { label: "About", href: "/about" },
+  { label: "WhatsApp AI Agent", href: "/whatsapp-ai-agent" },
   { label: "Contact", href: "/contact" },
 ];
 

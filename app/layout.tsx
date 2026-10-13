@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { brand, contact, siteUrl, socials } from "@/lib/site";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { WhatsAppPopup } from "@/components/WhatsAppPopup";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -81,6 +82,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <WhatsAppPopup />
       </body>
     </html>
   );

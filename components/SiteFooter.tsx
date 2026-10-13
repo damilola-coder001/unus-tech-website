@@ -39,6 +39,9 @@ export function SiteFooter() {
                   <Link href={`/services#${s.id}`}>{s.title}</Link>
                 </li>
               ))}
+              <li>
+                <Link href="/whatsapp-ai-agent">WhatsApp AI Agent</Link>
+              </li>
             </ul>
           </div>
           {contact.email || socials.length > 0 ? (
