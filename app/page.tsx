@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { brand, meeting, problemsWeSolve, projects, services, approach } from "@/lib/site";
 import { MeetingBand, MeetingCTA } from "@/components/MeetingCTA";
 import { ProjectCard } from "@/components/ProjectEmbed";
@@ -17,20 +18,35 @@ export default function HomePage() {
       <section className="hero" aria-labelledby="hero-heading">
         <div className="container hero-grid">
           <div>
-            <span className="eyebrow">{brand.kicker}</span>
-            <h1 id="hero-heading">{brand.tagline}</h1>
-            <p className="lead">
+            <span className="eyebrow hero-enter">{brand.kicker}</span>
+            <h1
+              id="hero-heading"
+              className="hero-enter"
+              style={{ "--hero-delay": "90ms" } as CSSProperties}
+            >
+              {brand.tagline}
+            </h1>
+            <p
+              className="lead hero-enter"
+              style={{ "--hero-delay": "180ms" } as CSSProperties}
+            >
               We build custom automation systems that save time, simplify
               operations, and help businesses do more with less friction.
             </p>
-            <div className="hero-actions">
+            <div
+              className="hero-actions hero-enter"
+              style={{ "--hero-delay": "270ms" } as CSSProperties}
+            >
               <MeetingCTA compact />
               <Link className="button button-secondary" href="/work">
                 Explore Our Work
               </Link>
             </div>
           </div>
-          <div className="hero-art">
+          <div
+            className="hero-art hero-enter-art"
+            style={{ "--hero-delay": "150ms" } as CSSProperties}
+          >
             <Image
               src={brand.logo}
               alt="Unus Technologies logo — Ideas × Code × Impact"

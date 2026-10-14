@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { brand, contact, siteUrl, socials } from "@/lib/site";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { WhatsAppPopup } from "@/components/WhatsAppPopup";
 import "./globals.css";
 
@@ -37,8 +38,10 @@ export const metadata: Metadata = {
 /**
  * Applies the saved (or OS-preferred) theme before first paint so the
  * page never flashes the wrong theme. Mirrors ThemeToggle's logic.
+ * Also flags `html[data-js="true"]` synchronously so ScrollReveal CSS can
+ * hide-then-reveal targets without a flash (no-JS visitors see everything).
  */
-const themeInitScript = `(function(){try{var t=localStorage.getItem("unus-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.dataset.theme=t;}catch(e){}})();`;
+const themeInitScript = `(function(){try{document.documentElement.dataset.js="true";var t=localStorage.getItem("unus-theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.dataset.theme=t;}catch(e){}})();`;
 
 /**
  * Structured data: tells Google this site belongs to an Organization
@@ -88,6 +91,7 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <SiteFooter />
         <WhatsAppPopup />
+        <ScrollReveal />
       </body>
     </html>
   );

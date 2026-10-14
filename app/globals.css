@@ -705,6 +705,114 @@ a:hover {
   color: var(--color-gold);
 }
 
+/* Motion: buttons, cards, hero entrance, scroll reveal.
+   Hidden/reveal states live under `prefers-reduced-motion: no-preference`
+   only, so reduced-motion and no-JS visitors always see full content.
+   Reveals animate the `translate` property (not `transform`) so they never
+   fight the hover lift, which uses `transform`. */
+
+/* Pick 3 — Button micro-interactions: lift + gold glow, press on tap. */
+.button {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(216, 185, 138, 0.28);
+}
+
+.button:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+}
+
+/* Pick 6 — Card hover lift. Opacity/translate transitions serve the
+   scroll reveal (Picks 1); `is-visible` is added by ScrollReveal. */
+.card {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.7s ease,
+    translate 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(216, 185, 138, 0.45);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* Pick 1 — Scroll-reveal targets. Hidden ONLY when JS runs (head script
+   sets `html[data-js="true"]` before first paint, so no flash) and the
+   visitor wants motion. `pointer-events: none` keeps hidden blocks from
+   catching hovers while faded out. */
+.project,
+.meeting-band,
+.section .container > .eyebrow,
+.section .container > h1,
+.section .container > h2,
+.section .container > p.lead {
+  transition:
+    opacity 0.7s ease,
+    translate 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js="true"] .card:not(.is-visible),
+  html[data-js="true"] .project:not(.is-visible),
+  html[data-js="true"] .meeting-band:not(.is-visible),
+  html[data-js="true"] .section .container > .eyebrow:not(.is-visible),
+  html[data-js="true"] .section .container > h1:not(.is-visible),
+  html[data-js="true"] .section .container > h2:not(.is-visible),
+  html[data-js="true"] .section .container > p.lead:not(.is-visible) {
+    opacity: 0;
+    translate: 0 26px;
+    pointer-events: none;
+  }
+
+  /* Pick 2 — Hero entrance: staggered rise on load. Delays come from
+     `--hero-delay` inline styles in page.tsx; pure CSS, no JS needed. */
+  .hero-enter {
+    opacity: 0;
+    animation: hero-rise 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    animation-delay: var(--hero-delay, 0ms);
+  }
+
+  .hero-enter-art {
+    opacity: 0;
+    animation: hero-art-in 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    animation-delay: var(--hero-delay, 0ms);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes hero-art-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   body,
   .site-header,
@@ -722,5 +830,16 @@ a:hover {
   }
   .embed-skeleton {
     animation: none;
+  }
+  /* Motion opt-out: no lifts, presses, or transitions. */
+  .button,
+  .card {
+    transition: none;
+  }
+  .button:hover,
+  .button:active,
+  .card:hover {
+    transform: none;
+    box-shadow: none;
   }
 }
